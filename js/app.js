@@ -44,6 +44,21 @@ var Player = function(x, y, speed) {
 };
 
 Player.prototype.update = function() {
+    // Wining 
+    if (player.y + 10 <= 0) {        
+        player.x = 202.5;
+        player.y = 383;
+    }
+    // Boundres
+    if (player.y > 383 ) {
+        player.y = 383;
+    }
+    if (player.x > 402.5) {
+        player.x = 402.5;
+    }
+    if (player.x < 2.5) {
+        player.x = 2.5;
+    }
 };
 
 // Draw the player on the screen, required method for game
@@ -67,26 +82,12 @@ Player.prototype.handleInput = function(keyPress) {
 };
 
 Enemy.prototype.checkCollision = function () {
+        var enemy = this;
         Enemy.x = this.x;
         Enemy.y = this.y;
   if (  player.y + 130 >= Enemy.y + 90 && player.x + 25 <= Enemy.x + 88 && player.y + 73 <= Enemy.y + 135 && player.x + 76 >= Enemy.x + 11) {
         player.x = 202.5;
         player.y = 383;
-    }
-    // Wining 
-    if (player.y + 10 <= 0) {        
-        player.x = 202.5;
-        player.y = 383;
-    }
-    // Boundres
-    if (player.y > 383 ) {
-        player.y = 383;
-    }
-    if (player.x > 402.5) {
-        player.x = 402.5;
-    }
-    if (player.x < 2.5) {
-        player.x = 2.5;
     }
 };
 
