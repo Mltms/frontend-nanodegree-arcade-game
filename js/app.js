@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+var Enemy = function (x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -12,7 +12,7 @@ var Enemy = function(x, y, speed) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -20,15 +20,15 @@ Enemy.prototype.update = function(dt) {
     
     // Loop the Bugs
     if (this.x >= 505) {
-    this.x = 0 ;
-  }
+    this.x = 0;
+    }
     
-    checkCollision(this);
+    this.checkCollision();
 };
 
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -44,7 +44,7 @@ var Player = function(x, y, speed) {
 };
 
 Player.prototype.update = function() {
-}
+};
 
 // Draw the player on the screen, required method for game
 Player.prototype.render = function() {
@@ -53,31 +53,28 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'left') {
-        player.x -= player.speed;
+        this.x -= this.speed;
     }
     if (keyPress == 'up') {
-        player.y -= player.speed - 35;
+        this.y -= this.speed - 20;
     }
     if (keyPress == 'right') {
-        player.x += player.speed;
+        this.x += this.speed;
     }
     if (keyPress == 'down') {
-        player.y += player.speed - 35;
+        this.y += this.speed - 20;
     }
 };
 
-var checkCollision = function(Enemy) {
-    // check for collision between enemy and player
-    if (
-        player.y + 130 >= Enemy.y + 90
-        && player.x + 25 <= Enemy.x + 88
-        && player.y + 73 <= Enemy.y + 135
-        && player.x + 76 >= Enemy.x + 11) {
+Enemy.prototype.checkCollision = function () {
+        Enemy.x = this.x;
+        Enemy.y = this.y;
+  if (  player.y + 130 >= Enemy.y + 90 && player.x + 25 <= Enemy.x + 88 && player.y + 73 <= Enemy.y + 135 && player.x + 76 >= Enemy.x + 11) {
         player.x = 202.5;
         player.y = 383;
     }
     // Wining 
-    if (player.y + 20 <= 0) {        
+    if (player.y + 10 <= 0) {        
         player.x = 202.5;
         player.y = 383;
     }
@@ -90,8 +87,8 @@ var checkCollision = function(Enemy) {
     }
     if (player.x < 2.5) {
         player.x = 2.5;
-    }};
-
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -105,7 +102,7 @@ var Bug4 = new Enemy(0, 200, 60);
 allEnemies.push(Bug1,Bug2,Bug3,Bug4);
 
 
-var player = new Player(202.5, 383, 120);
+var player = new Player(202.5, 383, 100);
 
 
 // This listens for key presses and sends the keys to your
